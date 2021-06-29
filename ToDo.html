@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <link href="./New folder/css/all.min.css" rel="stylesheet">
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    .title{
+        color: rgb(16, 46, 128);
+    }
+        h1{
+            color: black;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body{
+        margin: 0;
+        background-color: #BCD8C1;
+        animation: mymove 240s infinite;
+    }
+    @keyframes mymove {
+        0%{background: rgb(252, 63, 63); color: rgb(4, 133, 133);}
+        33%  {background: rgb(38, 139, 38); color: rgb(248, 64, 248);}
+        66%  {background: rgb(223, 67, 163); color: rgb(241, 241, 65);}
+        100% {background: rgb(223, 180, 42); color: rgb(252, 63, 63);}
+    }
+    #wrapper{
+        width:35%;
+        margin: 20px auto;
+        border: 2px solid black;
+        border-radius: 15px;
+        padding: 10px;
+    }
+    #inputWrapper{
+        display: flex;
+        
+    }
+    #inputWrapper input{
+        flex: 1;
+        padding: 10px;
+        border-radius: 25px ;
+    }
+    #inputWrapper input[type]{
+        font-family: monospace;
+        border: none;
+        outline: none;
+        color: rgb(16, 46, 128);
+    }
+    #inputWrapper button{
+        /*background-color: #439A86;*/
+        background-color: rgb(27, 11, 167);
+        color: white;
+        
+        
+        height: 50px;
+        width: 50px;
+        border-radius: 25px;
+        cursor: pointer;
+        border: none;
+    }
+    #inputWrapper button:hover{
+        opacity: 0.7;
+        
+    }
+    #ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        margin-top: 20px;
+    }
+    #ul li {
+        
+        border:none;
+        border-radius: 25px;
+        border-bottom: 3px ridge #222E50;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        
+    
+    }
+    .edit{
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+    font-size: 25px;
+    color: black;
+    }
+    .edit:hover{
+        color: rgb(11, 230, 30);
+        font-size: larger;
+    }
+    #ul li .close {
+        font-size: 50px;
+        color:black;
+        padding: 10px;
+        cursor: pointer;
+    } 
+    #ul li .close:hover {
+        color: rgb(243, 24, 24);   
+    }
+    .userEntry{  
+        color: black;
+        font-weight: bolder;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    .userEntry:hover{
+        color: blue;
+    }
+</style>
+<body> 
+    <h1> <span class="title">TODO</span> List App</h1>
+    <div id="wrapper">
+        <div id="inputWrapper">
+            <input type="text" name="" id="listDetail" placeholder="Enter the text to add in list" autofocus> &nbsp;
+            <button id="addBtn"><i class="fas fa-plus"></i></button> 
+        </div>
+    <ul id="ul">
+    </ul>
+    </div>
+<script>
+    var listDetail = document.getElementById("listDetail");
+    var addBtn = document.getElementById("addBtn");
+    var ul = document.getElementById("ul");
+    //ADDING THE TASKS IN LIST
+    addBtn.onclick = function () {
+    if (listDetail.value.trim() !== "") {   
+        var entry = document.createElement("SPAN");
+        var entryText = document.createTextNode(listDetail.value);
+        entry.className = "userEntry";
+        var li = document.createElement("LI");
+        entry.appendChild(entryText);
+        li.appendChild(entry);
+        ul.appendChild(li);
+    }
+    else {
+        alert("You must enter the value in ToDo list");
+    }
+    //EDITING THE ENTERED TEXT
+    var edit = document.createElement("SPAN");
+    var eText = document.createTextNode("\u270E");
+    edit.className = "edit";
+    edit.appendChild(eText);
+    li.appendChild(edit);
+    edit.onclick = function () { 
+        var c ;
+        var entry = this.parentElement.getElementsByClassName("userEntry")[0]; 
+        var listvalue=entry.innerText;
+        listDetail.value=listvalue;
+        edit.onclick = function () {
+            c=listDetail.value;  
+            if(c=="")
+                alert("You must enter the value in ToDo list");
+            else
+                entry.innerText = c; 
+                listDetail.value="";
+            } 
+    } 
+    //.....Deleting the entered list or task.......
+    var close = document.createElement("SPAN");
+    var cText = document.createTextNode("\u00D7");
+    close.className = "close";
+    close.appendChild(cText);
+    li.appendChild(close);
+    close.onclick = function () {
+        this.parentElement.style.display = "none";
+    }
+    listDetail.value = "";
+}
+</script>
+</body>
+</html>
